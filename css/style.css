@@ -4,4 +4,11 @@
 }
 .characteristic{
     columns: 2;
+    
+}
+.characteristic i{
+margin-right: 15px;
+}
+.style-none{
+    list-style-type: none;
 }
