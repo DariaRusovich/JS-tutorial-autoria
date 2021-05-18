@@ -21,7 +21,44 @@
               <div class="col-3">filters</div>
               <div class="col-9">
                 <div class="row row-cols-1 g-0" id="carList">
-                    
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img loading="lazy" width="1" height="1" class="card-img car-img" src="${carData.img}" alt="${carData.make} ${carData.model}">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
+                          <span class="rating">rating</span>
+                          <h6>${carData.price}$</h6>
+                          <ul class="characteristic g-0">
+                            <li>Пробег</li>
+                            <li>Топливо</li>
+                            <li>Город</li>
+                            <li>Трансмиссия</li>
+                          </ul>
+                          <p>Fuel consumption</p>
+                          <ul class="consume d-flex">
+                            <li>road</li>
+                            <li>city</li>
+                            <li>mixed</li>
+                          </ul>
+                          <span>vin</span>
+                          <p>Color:</p>
+                          <a href="tel:${carData.phone}" class="btn btn-success"><i class="bi bi-telephone-forward-fill me-2"></i>Call seller</a>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                          <div>
+                            <small class="me-3"><i class="bi bi-clock-fill me-1"></i>${carData.timestamp}</small>
+                            <small><i class="bi bi-person-check-fill me-1"></i>${carData.seller}</small>
+                          </div>
+                          <small><i class="bi bi-eye-fill me-1"></i>${carData.views}</small>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
                 </div>
               </div>
           </div>
