@@ -1,38 +1,49 @@
-.car-img{
-    height: 250px;
-    object-fit: cover;
+.car-img {
+  height: 250px;
+  object-fit: cover;
 }
-.characteristic{
-    display: inline-block;
-    width: 100%;
-    
+.characteristic {
+  display: inline-block;
+  width: 100%;
+  columns: 2;
+  padding-left: 0;
 }
-.vin-code{
-    position: relative;
-    padding: 3px 30px 3px 40px;
-    border: 1px solid hsl(206, 61%, 37%);
-    border-radius: 3px;
+.characteristic i {
+  margin-right: 15px;
 }
-.vin-code::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: hsl(206, 61%, 37%);
-    width: 30px;
-    height: 100%;
+.style-none {
+  list-style-type: none;
 }
-.vin-icon{
-    position: absolute;
-    top: 0;
-    left: 5px;
-    color: hsl(0, 0%, 100%);
-    font-size: 18px;
-}
-.characteristic i{
-margin-right: 15px;
-}
-.style-none{
-    list-style-type: none;
+.vin-code {
+  position: relative;
+  border-radius: 3px;
+  padding: 3px 10px 3px 40px;
+  border: 1px solid hsl(206, 61%, 37%);
 }
 
+.vin-code.checked::before, .vin-code.unchecked::before {
+  content: "VIN";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: hsl(206, 61%, 37%);
+  color: #fff;
+  font-weight: 700;
+  width: 30px;
+  height: 100%;
+}
+
+.vin-code.unchecked::before {
+    background: hsl(5, 61%, 37%);
+}
+.vin-code.unchecked {
+  border: 1px solid hsl(5, 61%, 37%);
+}
+
+.vin-icon {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  color: hsl(0, 0%, 100%);
+  font-size: 18px;
+}

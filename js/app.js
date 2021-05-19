@@ -40,13 +40,16 @@ function createCard(carData) {
           <li>${carData.consume.city}</li>
           <li>${carData.consume.mixed}</li>
         </ul>
-       
-        
-        <span class="vin-code "><i class="bi bi-check2-circle vin-icon"></i>${carData.vin}</span>
-                          
+        <span class="vin-code ${carData.vin_check ? 'checked' : 'unchecked'}">
+        ${carData.vin}</span>
         <p class="mt-2">Color: ${carData.color}</p>
         
         <a href="tel:${carData.phone}" class="btn btn-success"><i class="bi bi-telephone-forward-fill me-2"></i>Call seller</a>
+      </div>
+        
+        
+                          
+        
       </div>
     </div>
     <div class="col-12">
