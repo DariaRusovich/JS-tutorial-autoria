@@ -31,7 +31,7 @@
                           <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
                           <span class="rating">rating</span>
                           <h6>${carData.price}$</h6>
-                          <ul class="characteristic style-none g-0">
+                          <ul class="characteristic style-none g-0 row-cols-1">
                             <li><i class="bi bi-speedometer"></i>Пробег</li>
                             <li><i class="bi bi-moisture"></i>Топливо</li>
                             <li><i class="bi bi-geo-alt"></i>Город</li>
@@ -43,8 +43,11 @@
                             <li>city</li>
                             <li>mixed</li>
                           </ul>
-                          <span>vin</span>
-                          <p>Color:</p>
+                          <div class="vin-block">
+                            <span class="vin-code"><i class="bi bi-check2-circle vin-icon"></i>vin</span>
+                          </div>
+                          
+                          <p class="mt-2">Color:</p>
                           <a href="tel:${carData.phone}" class="btn btn-success"><i class="bi bi-telephone-forward-fill me-2"></i>Call seller</a>
                         </div>
                       </div>

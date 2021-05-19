@@ -3,8 +3,31 @@
     object-fit: cover;
 }
 .characteristic{
-    columns: 2;
+    display: inline-block;
+    width: 100%;
     
+}
+.vin-code{
+    position: relative;
+    padding: 3px 30px 3px 40px;
+    border: 1px solid hsl(206, 61%, 37%);
+    border-radius: 3px;
+}
+.vin-code::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: hsl(206, 61%, 37%);
+    width: 30px;
+    height: 100%;
+}
+.vin-icon{
+    position: absolute;
+    top: 0;
+    left: 5px;
+    color: hsl(0, 0%, 100%);
+    font-size: 18px;
 }
 .characteristic i{
 margin-right: 15px;
@@ -12,3 +35,4 @@ margin-right: 15px;
 .style-none{
     list-style-type: none;
 }
+
