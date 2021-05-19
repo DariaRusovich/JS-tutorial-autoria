@@ -30,15 +30,15 @@ function createCard(carData) {
         <h6>${carData.price}$</h6>
         <ul class="characteristic style-none g-0">
           <li><i class="bi bi-speedometer"></i>${carData.odo} km</li>
-          <li><i class="bi bi-moisture"></i>${carData.fuel}</li>
+          <li><i class="fas fa-gas-pump"></i></i>${carData.fuel}</li>
           <li><i class="bi bi-geo-alt"></i>${carData.country}</li>
-          <li><i class="bi bi-geo-alt"></i>${carData.transmission}</li>
+          <li><i class="fas fa-box"></i></i>${carData.transmission}</li>
         </ul>
-        <p>Fuel consumption:</p>
+        <p>Fuel consumption (l/km):</p>
         <ul class="consume style-none d-flex justify-content-around">
-          <li>${carData.consume.road}</li>
-          <li>${carData.consume.city}</li>
-          <li>${carData.consume.mixed}</li>
+          <li><i class="fas fa-road"></i>${carData.consume.road}</li>
+          <li><i class="fas fa-city"></i>${carData.consume.city}</li>
+          <li><i class="fas fa-random"></i>${carData.consume.mixed}</li>
         </ul>
         <span class="vin-code ${carData.vin_check ? 'checked' : 'unchecked'}">
         ${carData.vin}</span>
