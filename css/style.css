@@ -6,7 +6,7 @@
   display: inline-block;
   width: 100%;
   columns: 2;
-  
+
 }
 .consume, .characteristic{
     padding-left: 0;
@@ -15,7 +15,14 @@
   margin-right: 15px;
   color: hsl(14, 72%, 47%);
 }
- 
+.consume span{
+  margin-left: 5px;
+}
+.car-price{
+  color: hsl(120, 100%, 33%);
+  font-weight: 700;
+
+}
 
 
 .style-none {
