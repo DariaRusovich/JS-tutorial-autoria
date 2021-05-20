@@ -19,7 +19,7 @@
   margin-left: 5px;
 }
 .car-price{
-  color: hsl(120, 100%, 33%);
+  color: hsl(120, 83%, 25%);
   font-weight: 700;
 
 }
@@ -32,15 +32,15 @@
   position: relative;
   border-radius: 3px;
   padding: 3px 10px 3px 40px;
-  border: 1px solid hsl(206, 61%, 37%);
+  border: 1px solid hsl(120, 83%, 25%);;
 }
 
-.vin-code.checked::before, .vin-code.unchecked::before {
+.vin-code.checked::before, .vin-code.unchecked::before, .vin-code.unknown::before {
   content: "VIN";
   position: absolute;
   top: 0;
   left: 0;
-  background: hsl(206, 61%, 37%);
+  background: hsl(120, 83%, 25%);
   color: #fff;
   font-weight: 700;
   width: 35px;
@@ -49,9 +49,15 @@
 }
 
 .vin-code.unchecked::before {
-    background: hsl(5, 61%, 37%);
+    background: hsl(37, 100%, 43%);
 }
 .vin-code.unchecked {
+  border: 1px solid hsl(37, 100%, 43%);
+}
+.vin-code.unknown::before{
+  background: hsl(5, 61%, 37%);
+  
+}
+.vin-code.unknown{
   border: 1px solid hsl(5, 61%, 37%);
 }
-
