@@ -44,10 +44,13 @@ function renderCards(cardsHtml, carListElement) {
 function createCard(carData) {
   let stars = ''
   for (let i = 0; i < 5; i++) {
-    if (i  < carData.rating) {
+    if (carData.rating - 0.5 > i) {
       stars += '<i class="bi bi-star-fill"></i>'
-    } else{
-      stars += '<i class="bi bi-star"></i>'
+    } else if(carData.rating > i){
+      stars += '<i class="bi bi-star-half"></i>'
+    }
+    else {
+      stars += '<i class="bi bi-star-full"></i>'
     }
   }
 
