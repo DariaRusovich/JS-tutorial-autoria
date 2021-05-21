@@ -1,7 +1,31 @@
 const CARS = JSON.parse(DATA);
 const carList = document.getElementById("carList");
+const sortSelect = document.getElementById("sortSelect");
+
 // CARS.length = 50
 console.log(CARS);
+
+
+
+sortSelect.addEventListener('change', event => {
+  const sortData = event.target.value.split('/')
+  const sortKey = sortData[0]
+  const sortType = sortData[1]
+  if ('string') {
+    CARS.sort((a,b) => {
+      return //????
+    })
+  } else{
+    CARS.sort((a,b) => {
+      return (a[sortKey] - b[sortKey]) * sortType
+    })
+  }
+  
+  
+  renderCards(createCardsHTML(CARS), carList);
+})
+
+
 
 renderCards(createCardsHTML(CARS), carList);
 
@@ -14,10 +38,19 @@ function createCardsHTML(carsArray) {
 }
 
 function renderCards(cardsHtml, carListElement) {
-  carListElement.insertAdjacentHTML("beforeend", cardsHtml);
+  carListElement.innerHTML = cardsHtml
 }
 
 function createCard(carData) {
+  let stars = ''
+  for (let i = 0; i < 5; i++) {
+    if (i  < carData.rating) {
+      stars += '<i class="bi bi-star-fill"></i>'
+    } else{
+      stars += '<i class="bi bi-star"></i>'
+    }
+  }
+
   return ` <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4">
@@ -26,7 +59,7 @@ function createCard(carData) {
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
-        <span class="rating">Rating ${carData.rating}</span>
+        <span class="rating">Rating ${stars} ${carData.rating}</span>
         <h6 class="car-price">${carData.price}$</h6>
         <ul class="characteristic style-none g-0">
           <li><i class="bi bi-speedometer"></i>${carData.odo} km</li>
@@ -43,18 +76,9 @@ function createCard(carData) {
         ${carData.vin ? `<span class="vin-code ${carData.vin_check ? 'checked' : 'unchecked'}">
         ${carData.vin}</span>` : `<span class="vin-code unknown"> Unknown
         </span>`}
-
-
-       
-
         ${carData.color ? `<p class="mt-2">Color: ${carData.color}</p>` : ''}
-        
         <a href="tel:${carData.phone}" class="btn btn-success"><i class="bi bi-telephone-forward-fill me-2"></i>Call seller</a>
       </div>
-        
-        
-                          
-        
       </div>
     </div>
     <div class="col-12">
@@ -78,3 +102,11 @@ function createCard(carData) {
 // }
 
 // arr.forEach(element => console.log(element))
+
+
+
+// const arr = [5,8,4,2,13,9,6,8,11,7,12,4,3,7,6,8]
+// arr.sort((a,b) => {
+//   return a-b
+// })
+// console.log(arr);

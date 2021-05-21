@@ -27,7 +27,13 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            search+actions <i class="bi bi-align-bottom"></i>
+            <select id="sortSelect">
+              <option disabled value="" selected>Sort...</option>
+              <option value="price/1">По цене (от меньшего)</option>
+              <option value="price/-1">По цене (от большего)</option>
+              <option value="year/1">По году (от меньшего)</option>
+              <option value="year/-1">По году (от большего)</option>
+            </select>
           </div>
           <div class="col-3">filters</div>
           <div class="col-9">
