@@ -11,7 +11,7 @@ sortSelect.addEventListener('change', event => {
   const sortData = event.target.value.split('/')
   const sortKey = sortData[0]
   const sortType = sortData[1]
-  if (typeof CARS[0][sortKey]  === 'string') {
+  if (typeof sortSelect === 'string') {
     CARS.sort((a,b) => {
       return a[sortKey].localeCompare(b[sortKey]);
       //return (a[sortKey].localeCompare(b[sortKey]))
