@@ -12,11 +12,15 @@ sortSelect.addEventListener('change', event => {
   const sortKey = sortData[0]
   const sortType = sortData[1]
   if (sortSelect === 'string') {
-    CARS.sort((a,b) => {
+    //CARS.sort((a,b) => {
       //return (a[sortKey].localeCompare(b[sortKey]))
      //return sortData.localeCompare(compareString[a[sortKey], b[sortKey]])
      //return ('' + a[sortKey]).localeCompare(b[sortKey]);
-
+    //CARS.localeCompare((a,b) => {
+      //return ('' + a[sortKey]).localeCompare(b[sortKey]);
+      //return (compareString[a[sortKey], b[sortKey]])
+      //return ('' + a[sortKey]), (b[sortKey]);
+      //return (a[sortKey].localeCompare(b[sortKey]))
     })
   } else{
     CARS.sort((a,b) => {
@@ -27,8 +31,10 @@ sortSelect.addEventListener('change', event => {
   
   renderCards(createCardsHTML(CARS), carList);
 })
-
-
+//let str1 = "ab";
+//let str2 = "cd";
+//let n = str1.localeCompare(str2);
+//console.log(n)
 
 renderCards(createCardsHTML(CARS), carList);
 
