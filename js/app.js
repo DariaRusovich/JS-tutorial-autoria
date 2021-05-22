@@ -11,10 +11,12 @@ sortSelect.addEventListener('change', event => {
   const sortData = event.target.value.split('/')
   const sortKey = sortData[0]
   const sortType = sortData[1]
-  if (sortSelect == 'string') {
+  if (sortSelect === 'string') {
     CARS.sort((a,b) => {
-      return (a[sortKey].localeCompare(b[sortKey]))
-     
+      //return (a[sortKey].localeCompare(b[sortKey]))
+     //return sortData.localeCompare(compareString[a[sortKey], b[sortKey]])
+
+
     })
   } else{
     CARS.sort((a,b) => {
