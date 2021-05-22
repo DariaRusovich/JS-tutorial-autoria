@@ -15,7 +15,7 @@ sortSelect.addEventListener('change', event => {
     CARS.sort((a,b) => {
       //return (a[sortKey].localeCompare(b[sortKey]))
      //return sortData.localeCompare(compareString[a[sortKey], b[sortKey]])
-
+     //return ('' + a[sortKey]).localeCompare(b[sortKey]);
 
     })
   } else{
