@@ -1,36 +1,44 @@
 const CARS = JSON.parse(DATA);
 const carList = document.getElementById("carList");
 const sortSelect = document.getElementById("sortSelect");
+const masonryBtns = document.getElementById("masonryBtns");
 
 // CARS.length = 50
 console.log(CARS);
 
-
+masonryBtns.addEventListener('click', event => {
+  const btn = event.target.closest('.masonry-btn')
+  // console.log(event.target, btn);
+  if (btn) {
+    btn.classList.remove('btn-secondary')
+    btn.classList.add('btn-success')
+    const btnSiblings = findSiblings(btn)
+    btnSiblings.forEach(btnSibling => {
+      btnSibling.classList.remove('btn-success')
+      btnSibling.classList.add('btn-secondary')
+    })
+    const type = btn.dataset.type
+    if (type == 1) {
+      carList.classList.remove('row-cols-2')
+      carList.classList.add('row-cols-1')
+    } else if (type == 2){
+      carList.classList.remove('row-cols-1')
+      carList.classList.add('row-cols-2')
+    }
+  }
+})
 
 sortSelect.addEventListener('change', event => {
   const sortData = event.target.value.split('/')
   const sortKey = sortData[0]
   const sortType = sortData[1]
-  if (typeof sortSelect === 'string') {
-    CARS.sort((a,b) => {
-      return a[sortKey].localeCompare(b[sortKey]);
-      //return (a[sortKey].localeCompare(b[sortKey]))
-     //return sortData.localeCompare(compareString[a[sortKey], b[sortKey]])
-     //return ('' + a[sortKey]).localeCompare(b[sortKey]);
-    //CARS.localeCompare((a,b) => {
-      //return ('' + a[sortKey]).localeCompare(b[sortKey]);
-      //return (compareString[a[sortKey], b[sortKey]])
-      //return ('' + a[sortKey]), (b[sortKey]);
-      //return (a[sortKey].localeCompare(b[sortKey]))
-    })
-   
-  } else{
-    CARS.sort((a,b) => {
+  CARS.sort((a, b) => {
+    if (typeof a[sortKey] === 'string' && typeof b[sortKey] === 'string') {
+      return a[sortKey].localeCompare(b[sortKey]) * sortType;
+    } else {
       return (a[sortKey] - b[sortKey]) * sortType
-    })
-  }
-  
-  
+    }
+  })
   renderCards(createCardsHTML(CARS), carList);
 })
 //let str1 = "ab";
@@ -57,11 +65,10 @@ function createCard(carData) {
   for (let i = 0; i < 5; i++) {
     if (carData.rating - 0.5 > i) {
       stars += '<i class="bi bi-star-fill"></i>'
-    } else if(carData.rating > i){
+    } else if (carData.rating > i) {
       stars += '<i class="bi bi-star-half"></i>'
-    }
-    else {
-      stars += '<i class="bi bi-star-full"></i>'
+    } else {
+      stars += '<i class="bi bi-star"></i>'
     }
   }
 
@@ -107,6 +114,18 @@ function createCard(carData) {
   </div>
   </div>`;
 }
+
+//utils
+
+function findSiblings(node) {
+  // const parent = node.parentElement
+  // const children = parent.children
+  // const childrenArray = Array.from(children)
+  // const siblingsArray = childrenArray.filter(child => child !== node)
+  // return siblingsArray
+  return Array.from(node.parentElement.children).filter(child => child !== node)
+}
+
 
 // const arr = [0,1,2,3,4,5,6,7,5,8,9]
 

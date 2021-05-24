@@ -25,17 +25,25 @@
   <body>
     <main>
       <div class="container">
+        <h1 class="text-center">Cars list</h1>
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 d-flex justify-content-between mb-3">
             <select id="sortSelect">
               <option disabled value="" selected>Sort...</option>
               <option value="price/1">По цене (от меньшего)</option>
               <option value="price/-1">По цене (от большего)</option>
               <option value="year/1">По году (от меньшего)</option>
               <option value="year/-1">По году (от большего)</option>
-              <option value="make">По наименованию </option>
-
+              <option value="make/1">По наименованию </option>
             </select>
+            <div class="masonry-btns" id="masonryBtns">
+              <button data-type="1" class="masonry-btn btn btn-success">
+                <i class="fas fa-bars"></i>
+              </button>
+              <button data-type="2" class="masonry-btn btn btn-secondary">
+                <i class="fas fa-th-large"></i>
+              </button>
+            </div>
           </div>
           <div class="col-3">filters</div>
           <div class="col-9">
