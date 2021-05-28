@@ -2,9 +2,45 @@ const CARS = JSON.parse(DATA);
 const carList = document.getElementById("carList");
 const sortSelect = document.getElementById("sortSelect");
 const masonryBtns = document.getElementById("masonryBtns");
+const searchForm = document.getElementById("searchForm");
 
 // CARS.length = 50
 console.log(CARS);
+
+
+
+
+searchForm.addEventListener('submit', function (e) {
+  e.preventDefault()
+  const query = this.search.value.trim().toLowerCase().split(' ').filter(word => !!word)
+  const searchFields = ['make', 'model', 'year']
+  const filteredCars = searchCars(query, searchFields, CARS)
+  renderCards(createCardsHTML(filteredCars), carList);
+})
+
+
+
+function searchCars(query, fields, cars) {
+
+  const filteredCars = cars.filter(car => {
+    return query.every(word => {
+      return fields.some(field => {
+        return String(car[field])?.trim()?.toLowerCase()?.includes(word)
+      })
+    })
+  })
+
+  return filteredCars
+}
+
+let key = 'name'
+const user = {
+  name: 'Ivan'
+}
+
+console.log(user[key]);
+let x = 2
+console.log(3 + x);
 
 masonryBtns.addEventListener('click', event => {
   const btn = event.target.closest('.masonry-btn')
@@ -21,7 +57,7 @@ masonryBtns.addEventListener('click', event => {
     if (type == 1) {
       carList.classList.remove('row-cols-2')
       carList.classList.add('row-cols-1')
-    } else if (type == 2){
+    } else if (type == 2) {
       carList.classList.remove('row-cols-1')
       carList.classList.add('row-cols-2')
     }
@@ -143,3 +179,18 @@ function findSiblings(node) {
 //   return a-b
 // })
 // console.log(arr);
+
+
+
+
+// forEach([1,2,3], num => {
+//   console.log(num);
+// })
+
+// function forEach(arr,cb) {
+//   for (let i = 0; i < arr.length; i++) {
+//     const el = arr[i];
+//     cb(el, i, arr)
+//   }
+// }
+
