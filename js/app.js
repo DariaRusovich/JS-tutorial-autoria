@@ -1,21 +1,39 @@
-const CARS = JSON.parse(DATA);
+const carsDATA = JSON.parse(DATA)
+let CARS = JSON.parse(DATA);
 const carList = document.getElementById("carList");
 const sortSelect = document.getElementById("sortSelect");
 const masonryBtns = document.getElementById("masonryBtns");
 const searchForm = document.getElementById("searchForm");
+const showMoreBtn = document.getElementById("showMoreBtn");
+
+
+const USDFormatter = new Intl.NumberFormat(undefined, {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0
+})
+const USDtoUAH = 27.6589
+const UAHFormatter = new Intl.NumberFormat(undefined, {
+  style: 'currency',
+  currency: 'UAH',
+  maximumFractionDigits: 0
+})
 
 // CARS.length = 50
 console.log(CARS);
 
 
-
+showMoreBtn.addEventListener('click', e => {
+  console.log('Show more btn click!');
+  renderCards(CARS, carList);
+})
 
 searchForm.addEventListener('submit', function (e) {
   e.preventDefault()
   const query = this.search.value.trim().toLowerCase().split(' ').filter(word => !!word)
   const searchFields = ['make', 'model', 'year']
-  const filteredCars = searchCars(query, searchFields, CARS)
-  renderCards(createCardsHTML(filteredCars), carList);
+  CARS = searchCars(query, searchFields, carsDATA)
+  renderCards(CARS, carList, true);
 })
 
 
@@ -29,18 +47,9 @@ function searchCars(query, fields, cars) {
       })
     })
   })
-
+  console.log(filteredCars);
   return filteredCars
 }
-
-let key = 'name'
-const user = {
-  name: 'Ivan'
-}
-
-console.log(user[key]);
-let x = 2
-console.log(3 + x);
 
 masonryBtns.addEventListener('click', event => {
   const btn = event.target.closest('.masonry-btn')
@@ -75,26 +84,35 @@ sortSelect.addEventListener('change', event => {
       return (a[sortKey] - b[sortKey]) * sortType
     }
   })
-  renderCards(createCardsHTML(CARS), carList);
+  renderCards(CARS, carList);
 })
-//let str1 = "ab";
-//let str2 = "cd";
-//let n = str1.localeCompare(str2);
-//console.log(n)
 
-renderCards(createCardsHTML(CARS), carList);
 
-function createCardsHTML(carsArray) {
+renderCards(CARS, carList);
+
+function renderCards(carsArray, carListElement, clear) {
+  const limit = 5
+  if (clear) {
+    carListElement.innerHTML = ''
+  }
+  const existsElems = carListElement.children.length
+  carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems))
+}
+
+function createCardsHTML(carsArray, limit, existsElems) {
+  console.log(existsElems);
   let cardsHTML = "";
-  carsArray.forEach((car) => {
-    cardsHTML += createCard(car);
-  });
+  for (let i = 0; i < limit; i++) {
+    const car = carsArray[i + existsElems];
+    if (car) {
+      cardsHTML += createCard(car);
+    }
+  }
+  console.log(cardsHTML);
   return cardsHTML;
 }
 
-function renderCards(cardsHtml, carListElement) {
-  carListElement.innerHTML = cardsHtml
-}
+
 
 function createCard(carData) {
   let stars = ''
@@ -107,7 +125,8 @@ function createCard(carData) {
       stars += '<i class="bi bi-star"></i>'
     }
   }
-
+  const dateObj = new Date(carData.timestamp)
+  const dateTimeSting = `${dateObj.toLocaleTimeString()} ${dateObj.toLocaleDateString()}`
   return ` <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4">
@@ -117,7 +136,8 @@ function createCard(carData) {
       <div class="card-body">
         <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
         <span class="rating">Rating ${stars} ${carData.rating}</span>
-        <h6 class="car-price">${carData.price}$</h6>
+        <h6 class="car-price">${USDFormatter.format(carData.price)}</h6>
+        <small>${UAHFormatter.format(carData.price * USDtoUAH)}</small>
         <ul class="characteristic style-none g-0">
           <li><i class="bi bi-speedometer"></i>${carData.odo} km</li>
           <li><i class="fas fa-gas-pump"></i></i>${carData.fuel}</li>
@@ -141,7 +161,7 @@ function createCard(carData) {
     <div class="col-12">
       <div class="card-footer text-muted d-flex justify-content-between align-items-center">
         <div>
-          <small class="me-3"><i class="bi bi-clock-fill me-1"></i>${carData.timestamp}</small>
+          <small class="me-3"><i class="bi bi-clock-fill me-1"></i>${dateTimeSting}</small>
           <small><i class="bi bi-person-check-fill me-1"></i>${carData.seller}</small>
         </div>
         <small><i class="bi bi-eye-fill me-1"></i>${carData.views}</small>
@@ -194,3 +214,25 @@ function findSiblings(node) {
 //   }
 // }
 
+
+
+
+// function User(name, sname, age) {
+//     this.name = name,
+//     this.sname = sname,
+//     this.fullname = `${name} ${sname}`,
+//     this.age = age, 
+//     this.status = 'New',
+//     this.likes = 0,
+//     this.comments = 0
+// }
+
+// console.log(new User('a','b', 2));
+
+
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+  hour: '2-digit',
+  minute: '2-digit',
+})
+
+console.log(dateFormatter.format((new Date().getTimezoneOffset() * 60000) + 600000));
