@@ -25,8 +25,10 @@ console.log(CARS);
 
 showMoreBtn.addEventListener('click', e => {
   console.log('Show more btn click!');
+  
   renderCards(CARS, carList);
 })
+
 
 searchForm.addEventListener('submit', function (e) {
   e.preventDefault()
@@ -48,7 +50,9 @@ function searchCars(query, fields, cars) {
     })
   })
   console.log(filteredCars);
+  
   return filteredCars
+  
 }
 
 masonryBtns.addEventListener('click', event => {
@@ -90,24 +94,35 @@ sortSelect.addEventListener('change', event => {
 
 renderCards(CARS, carList);
 
+
 function renderCards(carsArray, carListElement, clear) {
   const limit = 5
   if (clear) {
     carListElement.innerHTML = ''
+    showMoreBtn.classList.add('btn-hide')
   }
+  
+ 
+  
   const existsElems = carListElement.children.length
   carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems))
 }
 
 function createCardsHTML(carsArray, limit, existsElems) {
   console.log(existsElems);
+  console.log(carsArray)
+  
   let cardsHTML = "";
   for (let i = 0; i < limit; i++) {
     const car = carsArray[i + existsElems];
     if (car) {
       cardsHTML += createCard(car);
+      
     }
+    
+    console.log(createCard);
   }
+ 
   console.log(cardsHTML);
   return cardsHTML;
 }

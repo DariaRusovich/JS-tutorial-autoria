@@ -50,7 +50,9 @@ body{
   height: 100%;
   text-align: center;
 }
-
+.btn-hide{
+  display: none;
+}
 .vin-code.unchecked::before {
     background: hsl(37, 100%, 43%);
 }
