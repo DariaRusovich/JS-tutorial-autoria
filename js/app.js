@@ -96,7 +96,7 @@ renderCards(CARS, carList);
 
 
 function renderCards(carsArray, carListElement, clear) {
-  const limit = 5
+  const limit = 6
   if (clear) {
     carListElement.innerHTML = ''
     
@@ -152,11 +152,11 @@ function createCard(carData) {
   const dateObj = new Date(carData.timestamp)
   const dateTimeSting = `${dateObj.toLocaleTimeString()} ${dateObj.toLocaleDateString()}`
   return ` <div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-4">
+  <div class="row g-0 card-half">
+    <div class="col-md-4 card-img-wrap">
       <img loading="lazy" width="1" height="1" class="card-img car-img" src="${carData.img}" alt="${carData.make} ${carData.model}">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 card-body-wrap">
       <div class="card-body">
         <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
         <span class="rating">Rating ${stars} ${carData.rating}</span>

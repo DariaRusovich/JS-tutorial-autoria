@@ -1,6 +1,18 @@
 body{
   padding-bottom: 1000px;
+  color: hsl(240, 19%, 17%);
 }
+.car-list.row-cols-2 .card-half{
+  display: flex;
+  flex-direction: column;
+}
+.car-list.row-cols-2 .card-img-wrap{
+  width: 100%;
+}
+.car-list.row-cols-2 .card-body-wrap{
+  width: 100%;
+}
+
 .car-img {
   height: 250px;
   object-fit: cover;
@@ -37,7 +49,11 @@ body{
   padding: 3px 10px 3px 40px;
   border: 1px solid hsl(120, 83%, 25%);;
 }
-
+.sort-select{
+  padding: .375rem .75rem;
+  border-radius: 3px;
+  border: 1px solid #ced4da;
+}
 .vin-code.checked::before, .vin-code.unchecked::before, .vin-code.unknown::before {
   content: "VIN";
   position: absolute;
