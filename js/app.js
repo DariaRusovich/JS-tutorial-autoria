@@ -99,19 +99,28 @@ function renderCards(carsArray, carListElement, clear) {
   const limit = 5
   if (clear) {
     carListElement.innerHTML = ''
-    showMoreBtn.classList.add('btn-hide')
+    
   }
   
  
   
   const existsElems = carListElement.children.length
   carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems))
+  if(limit + existsElems >= carsArray){
+    showMoreBtn.classList.add('btn-hide')
+    
+  }
+  console.log(carListElement);
 }
 
 function createCardsHTML(carsArray, limit, existsElems) {
   console.log(existsElems);
-  console.log(carsArray)
+  console.log(carsArray.length);
   
+ 
+
+
+
   let cardsHTML = "";
   for (let i = 0; i < limit; i++) {
     const car = carsArray[i + existsElems];
@@ -123,7 +132,7 @@ function createCardsHTML(carsArray, limit, existsElems) {
     console.log(createCard);
   }
  
-  console.log(cardsHTML);
+  //console.log(cardsHTML);
   return cardsHTML;
 }
 
@@ -194,7 +203,9 @@ function findSiblings(node) {
   // const childrenArray = Array.from(children)
   // const siblingsArray = childrenArray.filter(child => child !== node)
   // return siblingsArray
+  
   return Array.from(node.parentElement.children).filter(child => child !== node)
+  
 }
 
 
