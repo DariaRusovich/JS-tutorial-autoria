@@ -97,6 +97,7 @@ renderCards(CARS, carList);
 
 function renderCards(carsArray, carListElement, clear) {
   const limit = 6
+  console.log(clear)
   if (clear) {
     carListElement.innerHTML = ''
     
@@ -107,17 +108,16 @@ function renderCards(carsArray, carListElement, clear) {
   const existsElems = carListElement.children.length
   carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems))
   if(limit + existsElems >= carsArray){
-    showMoreBtn.classList.add('btn-hide')
-    
+    showMoreBtn.classList.add('btn-hide') 
   }
-  console.log(carListElement);
+  console.log(carListElement.innerHTML);
 }
 
 function createCardsHTML(carsArray, limit, existsElems) {
   console.log(existsElems);
   console.log(carsArray.length);
   
- 
+ console.log(document.body.constructor.name)
 
 
 
@@ -125,10 +125,8 @@ function createCardsHTML(carsArray, limit, existsElems) {
   for (let i = 0; i < limit; i++) {
     const car = carsArray[i + existsElems];
     if (car) {
-      cardsHTML += createCard(car);
-      
+      cardsHTML += createCard(car); 
     }
-    
     console.log(createCard);
   }
  
