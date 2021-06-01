@@ -1,0 +1,99 @@
+body{
+  padding-bottom: 1000px;
+  color: hsl(240, 19%, 17%);
+}
+.car-list.row-cols-2 .card-half{
+  display: flex;
+  flex-direction: column;
+}
+.car-list.row-cols-2 .card-img-wrap{
+  width: 100%;
+}
+.car-list.row-cols-2 .card-body-wrap{
+  width: 100%;
+}
+.car-list.row-cols-2{
+justify-content: space-between;
+
+}
+.car-list.row-cols-2 .card{
+  width: 49%;
+  
+}
+
+.car-img {
+  height: 250px;
+  object-fit: cover;
+}
+.characteristic {
+  display: inline-block;
+  width: 100%;
+  columns: 2;
+
+}
+.consume, .characteristic{
+    padding-left: 0;
+}
+.characteristic i, .consume i {
+  margin-right: 15px;
+  color: hsl(14, 72%, 47%);
+}
+.consume span{
+  margin-left: 5px;
+}
+.car-price{
+  color: hsl(120, 83%, 25%);
+  font-size: 22px;
+  font-weight: 700;
+
+}
+.car-price-wrapper small{
+  color: hsl(0, 0%, 35%);
+}
+.rating {
+  color: hsl(46, 100%, 45%);
+  font-size: 25px;
+}
+
+.style-none {
+  list-style-type: none;
+}
+.vin-code {
+  position: relative;
+  border-radius: 3px;
+  padding: 3px 10px 3px 40px;
+  border: 1px solid hsl(120, 83%, 25%);;
+}
+.sort-select{
+  padding: .375rem .75rem;
+  border-radius: 3px;
+  border: 1px solid #ced4da;
+}
+.vin-code.checked::before, .vin-code.unchecked::before, .vin-code.unknown::before {
+  content: "VIN";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: hsl(120, 83%, 25%);
+  color: #fff;
+  font-weight: 700;
+  width: 35px;
+  height: 100%;
+  text-align: center;
+}
+.btn-hide{
+  display: none;
+}
+.vin-code.unchecked::before {
+    background: hsl(37, 100%, 43%);
+}
+.vin-code.unchecked {
+  border: 1px solid hsl(37, 100%, 43%);
+}
+.vin-code.unknown::before{
+  background: hsl(5, 61%, 37%);
+  
+}
+.vin-code.unknown{
+  border: 1px solid hsl(5, 61%, 37%);
+}

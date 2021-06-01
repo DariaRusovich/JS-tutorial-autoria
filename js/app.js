@@ -39,7 +39,6 @@ searchForm.addEventListener('submit', function (e) {
 })
 
 
-
 function searchCars(query, fields, cars) {
 
   const filteredCars = cars.filter(car => {
@@ -97,7 +96,7 @@ renderCards(CARS, carList);
 
 function renderCards(carsArray, carListElement, clear) {
   const limit = 6
-  console.log(clear)
+  
   if (clear) {
     carListElement.innerHTML = ''
     
@@ -110,14 +109,14 @@ function renderCards(carsArray, carListElement, clear) {
   if(limit + existsElems >= carsArray){
     showMoreBtn.classList.add('btn-hide') 
   }
-  console.log(carListElement.innerHTML);
+  
 }
 
 function createCardsHTML(carsArray, limit, existsElems) {
-  console.log(existsElems);
+  
   console.log(carsArray.length);
   
- console.log(document.body.constructor.name)
+ 
 
 
 
@@ -127,7 +126,7 @@ function createCardsHTML(carsArray, limit, existsElems) {
     if (car) {
       cardsHTML += createCard(car); 
     }
-    console.log(createCard);
+    //console.log(createCard);
   }
  
   //console.log(cardsHTML);
@@ -149,7 +148,7 @@ function createCard(carData) {
   }
   const dateObj = new Date(carData.timestamp)
   const dateTimeSting = `${dateObj.toLocaleTimeString()} ${dateObj.toLocaleDateString()}`
-  return ` <div class="card mb-3">
+  return ` <div class="card mb-3 ">
   <div class="row g-0 card-half">
     <div class="col-md-4 card-img-wrap">
       <img loading="lazy" width="1" height="1" class="card-img car-img" src="${carData.img}" alt="${carData.make} ${carData.model}">
@@ -157,9 +156,11 @@ function createCard(carData) {
     <div class="col-md-8 card-body-wrap">
       <div class="card-body">
         <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
-        <span class="rating">Rating ${stars} ${carData.rating}</span>
+        <span class="rating">${stars} ${carData.rating}</span>
+        <div class="d-flex car-price-wrapper">
         <h6 class="car-price">${USDFormatter.format(carData.price)}</h6>
-        <small>${UAHFormatter.format(carData.price * USDtoUAH)}</small>
+        <small class="ms-3">${UAHFormatter.format(carData.price * USDtoUAH)}</small>
+        </div>
         <ul class="characteristic style-none g-0">
           <li><i class="bi bi-speedometer"></i>${carData.odo} km</li>
           <li><i class="fas fa-gas-pump"></i></i>${carData.fuel}</li>
