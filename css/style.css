@@ -5,6 +5,11 @@ body{
 .car-list.row-cols-2 .card-half{
   display: flex;
   flex-direction: column;
+ 
+}
+
+.car-list.row-cols-2 .card{
+width: 49%;
 }
 .car-list.row-cols-2 .card-img-wrap{
   width: 100%;
@@ -12,12 +17,7 @@ body{
 .car-list.row-cols-2 .card-body-wrap{
   width: 100%;
 }
-.car-list.row-cols-2 .card:nth-of-type(2n+1){
-  padding-right: 10px;
-}
-.car-list.row-cols-2 .card:nth-of-type(2n){
-  padding-left: 10px;
-}
+
 .car-img {
   height: 250px;
   object-fit: cover;
