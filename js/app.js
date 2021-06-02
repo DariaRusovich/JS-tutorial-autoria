@@ -128,7 +128,7 @@ function createCardsHTML(carsArray, limit, existsElems) {
     showMoreBtn.classList.add('btn-hide') 
   }
   //console.log(carsArray.length) длина массива
-  //console.log(existsElems) начиная с 0 + limit
+  //console.log(existsElems) начиная с 0 + limit (лимит понятно)
   //console.log(cardsHTML);
   return cardsHTML;
 }
