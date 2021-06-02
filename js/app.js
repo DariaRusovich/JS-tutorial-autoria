@@ -24,7 +24,9 @@ const UAHFormatter = new Intl.NumberFormat(undefined, {
   currency: 'UAH',
   maximumFractionDigits: 0
 })
-
+const odoFormatter = new Intl.NumberFormat(undefined, {
+  useGrouping: true,
+})
 // CARS.length = 50
 console.log(CARS);
 
@@ -159,7 +161,7 @@ function createCard(carData) {
         <small class="ms-3">${UAHFormatter.format(carData.price * USDtoUAH)}</small>
         </div>
         <ul class="characteristic style-none g-0">
-          <li><i class="bi bi-speedometer"></i>${carData.odo} km</li>
+          <li><i class="bi bi-speedometer"></i>${odoFormatter.format(carData.odo)} km</li>
           <li><i class="fas fa-gas-pump"></i></i>${carData.fuel}</li>
           <li><i class="bi bi-geo-alt"></i>${carData.country}</li>
           <li><i class="fas fa-box"></i></i>${carData.transmission}</li>
