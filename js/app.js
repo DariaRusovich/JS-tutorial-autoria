@@ -102,22 +102,20 @@ sortSelect.addEventListener('change', event => {
 renderCards(CARS, carList);
 
 
-function renderCards(carsArray, carListElement, clear) {
+function renderCards(carsArray, carListElement, clear)  {  //clear-undefined
   const limit = 6
   if (clear) {
     carListElement.innerHTML = '' 
   }
-  const existsElems = carListElement.children.length
+  const existsElems = carListElement.children.length //children дочерние узлы-элементы(DOM навигация)
   carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems)) ///HERE!!!!!!!!
-  if(limit + existsElems >= carsArray){
-    showMoreBtn.classList.add('btn-hide') 
-  }
   
+
 }
 
 function createCardsHTML(carsArray, limit, existsElems) {
   
-  console.log(carsArray.length);
+  
   let cardsHTML = "";
   for (let i = 0; i < limit; i++) {
     const car = carsArray[i + existsElems];
@@ -126,7 +124,11 @@ function createCardsHTML(carsArray, limit, existsElems) {
     }
     //console.log(createCard);
   }
- 
+  if(limit + existsElems >= carsArray.length){
+    showMoreBtn.classList.add('btn-hide') 
+  }
+  //console.log(carsArray.length) длина массива
+  //console.log(existsElems) начиная с 0 + limit
   //console.log(cardsHTML);
   return cardsHTML;
 }
