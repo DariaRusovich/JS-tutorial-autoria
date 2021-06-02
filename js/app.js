@@ -5,6 +5,12 @@ const sortSelect = document.getElementById("sortSelect");
 const masonryBtns = document.getElementById("masonryBtns");
 const searchForm = document.getElementById("searchForm");
 const showMoreBtn = document.getElementById("showMoreBtn");
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+  day: '2-digit',
+  month: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+})
 
 
 const USDFormatter = new Intl.NumberFormat(undefined, {
@@ -175,7 +181,7 @@ function createCard(carData) {
     <div class="col-12">
       <div class="card-footer text-muted d-flex justify-content-between align-items-center">
         <div>
-          <small class="me-3"><i class="bi bi-clock-fill me-1"></i>${dateTimeSting}</small>
+          <small class="me-3"><i class="bi bi-clock-fill me-1"></i>${dateFormatter.format(carData.timestamp)}</small>
           <small><i class="bi bi-person-check-fill me-1"></i>${carData.seller}</small>
         </div>
         <small><i class="bi bi-eye-fill me-1"></i>${carData.views}</small>
@@ -246,9 +252,5 @@ function findSiblings(node) {
 // console.log(new User('a','b', 2));
 
 
-const dateFormatter = new Intl.DateTimeFormat(undefined, {
-  hour: '2-digit',
-  minute: '2-digit',
-})
 
-console.log(dateFormatter.format((new Date().getTimezoneOffset() * 60000) + 600000));
+//console.log(dateFormatter.format((new Date().getTimezoneOffset() * 60000) + 600000));
