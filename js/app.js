@@ -96,16 +96,11 @@ renderCards(CARS, carList);
 
 function renderCards(carsArray, carListElement, clear) {
   const limit = 6
-  
   if (clear) {
-    carListElement.innerHTML = ''
-    
+    carListElement.innerHTML = '' 
   }
-  
- 
-  
   const existsElems = carListElement.children.length
-  carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems))
+  carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems)) ///HERE!!!!!!!!
   if(limit + existsElems >= carsArray){
     showMoreBtn.classList.add('btn-hide') 
   }
@@ -115,11 +110,6 @@ function renderCards(carsArray, carListElement, clear) {
 function createCardsHTML(carsArray, limit, existsElems) {
   
   console.log(carsArray.length);
-  
- 
-
-
-
   let cardsHTML = "";
   for (let i = 0; i < limit; i++) {
     const car = carsArray[i + existsElems];
@@ -145,6 +135,7 @@ function createCard(carData) {
     } else {
       stars += '<i class="bi bi-star"></i>'
     }
+    
   }
   const dateObj = new Date(carData.timestamp)
   const dateTimeSting = `${dateObj.toLocaleTimeString()} ${dateObj.toLocaleDateString()}`
@@ -157,7 +148,7 @@ function createCard(carData) {
       <div class="card-body">
         <h5 class="card-title">${carData.make} ${carData.model} ${carData.engine_volume} (${carData.year})</h5>
         <span class="rating">${stars} ${carData.rating}</span>
-        <div class="d-flex car-price-wrapper">
+        <div class="d-flex car-price-wrapper align-items-center">
         <h6 class="car-price">${USDFormatter.format(carData.price)}</h6>
         <small class="ms-3">${UAHFormatter.format(carData.price * USDtoUAH)}</small>
         </div>
