@@ -5,6 +5,9 @@ const sortSelect = document.getElementById("sortSelect");
 const masonryBtns = document.getElementById("masonryBtns");
 const searchForm = document.getElementById("searchForm");
 const showMoreBtn = document.getElementById("showMoreBtn");
+const filterForm = document.getElementById("filterForm");
+const filterFields = ['make', 'fuel', 'transmission']
+
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
   month: '2-digit',
@@ -31,9 +34,63 @@ const odoFormatter = new Intl.NumberFormat(undefined, {
 console.log(CARS);
 
 
+filterForm.addEventListener('submit', function (e) {
+  e.preventDefault()
+  console.log('filterform submit');
+  const query = filterFields.map(field => {
+    // return Array.from(this[field]).filter(input => input.checked).map(input => input.value)
+    return Array.from(this[field]).reduce((values, input) => input.checked ? [...values, input.value] : values, [])
+  })
+  console.log(query);
+
+  CARS = filterCars(query, filterFields, carsDATA)
+  renderCards(CARS, carList, true);
+})
+
+// filterForm.addEventListener('reset', function (e) {
+//   e.preventDefault()
+//   console.log('filterform reset');
+// })
+
+renderFilterForm(filterFields, CARS, filterForm)
+
+function renderFilterForm(filterFields, cars, filterForm) {
+  filterForm.firstElementChild.innerHTML = createFilterForm(filterFields, cars)
+}
+
+function createFilterForm(filterFields, cars) {
+  let fieldsetsHTML = ''
+  filterFields.forEach(field => {
+    const values = cars.map((car) => {
+      return car[field]
+    })
+    const uniqueValues = Array.from(new Set(values)).sort()
+    fieldsetsHTML += createFilterFieldset(field, uniqueValues)
+  })
+  return fieldsetsHTML
+}
+
+function createFilterFieldset(field, uniqueValues) {
+  let fieldsHTML = ''
+  uniqueValues.forEach(value => fieldsHTML += createFilterField(field, value))
+  return `<fieldset class="mb-3">
+            <legend>${field.toUpperCase()}</legend>
+            <div class="fieldset-content d-flex flex-column">
+            ${fieldsHTML}
+            </div>
+          </fieldset>`
+}
+function createFilterField(field, value) {
+  return `<label>
+            <input type="checkbox" name="${field}" value="${value}">
+            ${value}
+          </label>`
+}
+
+
 showMoreBtn.addEventListener('click', e => {
   console.log('Show more btn click!');
-  
+
   renderCards(CARS, carList);
 })
 
@@ -42,24 +99,29 @@ searchForm.addEventListener('submit', function (e) {
   e.preventDefault()
   const query = this.search.value.trim().toLowerCase().split(' ').filter(word => !!word)
   const searchFields = ['make', 'model', 'year']
-  CARS = searchCars(query, searchFields, carsDATA)
+  CARS = filterCars(query, searchFields, carsDATA)
   renderCards(CARS, carList, true);
 })
 
 
-function searchCars(query, fields, cars) {
+function filterCars(query, fields, cars) {
 
   const filteredCars = cars.filter(car => {
-    return query.every(word => {
+    return query.every(part => {
       return fields.some(field => {
-        return String(car[field])?.trim()?.toLowerCase()?.includes(word)
+        const carValue = String(car[field])
+        if (typeof part === 'string') {
+          return carValue?.trim()?.toLowerCase()?.includes(part)
+        } else {
+          return part.length > 0 ? part.includes(carValue) : true
+        }
       })
     })
   })
   console.log(filteredCars);
-  
+
   return filteredCars
-  
+
 }
 
 masonryBtns.addEventListener('click', event => {
@@ -95,40 +157,39 @@ sortSelect.addEventListener('change', event => {
       return (a[sortKey] - b[sortKey]) * sortType
     }
   })
-  renderCards(CARS, carList);
+  renderCards(CARS, carList, true);
 })
 
 
 renderCards(CARS, carList);
 
 
-function renderCards(carsArray, carListElement, clear)  {  //clear-undefined
-  const limit = 6
+function renderCards(carsArray, carListElement, clear) {  //clear-undefined
+  const limit = 10
   if (clear) {
-    carListElement.innerHTML = '' 
+    carListElement.innerHTML = ''
   }
   const existsElems = carListElement.children.length //children дочерние узлы-элементы(DOM навигация)
+  if (limit + existsElems >= carsArray.length) {
+    showMoreBtn.classList.add('btn-hide')
+  } else {
+    showMoreBtn.classList.remove('btn-hide')
+  }
   carListElement.insertAdjacentHTML("beforeEnd", createCardsHTML(carsArray, limit, existsElems)) ///HERE!!!!!!!!
-  
-
 }
 
 function createCardsHTML(carsArray, limit, existsElems) {
-  
-  
   let cardsHTML = "";
   for (let i = 0; i < limit; i++) {
     const car = carsArray[i + existsElems];
     if (car) {
-      cardsHTML += createCard(car); 
+      cardsHTML += createCard(car);
     }
     //console.log(createCard);
   }
-  if(limit + existsElems >= carsArray.length){
-    showMoreBtn.classList.add('btn-hide') 
-  }
+
   //console.log(carsArray.length) длина массива
-  //console.log(existsElems) начиная с 0 + limit (лимит понятно)
+  //console.log(existsElems) начиная с 0 + limit
   //console.log(cardsHTML);
   return cardsHTML;
 }
@@ -145,7 +206,7 @@ function createCard(carData) {
     } else {
       stars += '<i class="bi bi-star"></i>'
     }
-    
+
   }
   const dateObj = new Date(carData.timestamp)
   const dateTimeSting = `${dateObj.toLocaleTimeString()} ${dateObj.toLocaleDateString()}`
@@ -203,9 +264,9 @@ function findSiblings(node) {
   // const childrenArray = Array.from(children)
   // const siblingsArray = childrenArray.filter(child => child !== node)
   // return siblingsArray
-  
+
   return Array.from(node.parentElement.children).filter(child => child !== node)
-  
+
 }
 
 
@@ -258,3 +319,73 @@ function findSiblings(node) {
 
 
 //console.log(dateFormatter.format((new Date().getTimezoneOffset() * 60000) + 600000));
+
+
+
+
+// [1,2,3].map((num) => {
+//  return 'blabla' + num
+// })
+
+
+// const users = [
+//   { name: 'Ivan', age: 18 },
+//   { name: 'Vasya', age: 19 },
+//   { name: 'Katya', age: 15 }
+// ]
+
+// const names = users.map((user) => {
+//   return user.name
+// })
+// console.log(names);
+
+
+
+// const nums = [5, 4, 7, 3, 4, 6, 8, 3, 5, 2]
+// nums.push(4, 245, 34, 5)
+
+// console.log(...nums);
+// // let sum = nums.reduce((sum, num) => sum + num, 0)
+
+// // console.log(sum);
+
+// sum(1,20)
+// sum(1,2,532,44,2,63,4,64,8,5,3,4,9,6)
+// function sum(...arr) {
+//   return arr.reduce((sum, num) => sum + num, 0)
+// }
+
+
+// // const user = {
+// //   name: 'Ivan',
+// //   age: 25,
+// //   get action1() {
+// //     return this.name
+// //   },
+// //   set action1(newName) {
+// //       this.name = newName
+// //   }
+// // }
+// console.log(user.action1());
+// user.action1('Oleg')
+// console.log(user);
+
+
+// const user = {
+//   name: "John",
+//   surname: "Smith",
+
+//   get fullName() {
+//     return `${this.name} ${this.surname}`;
+//   },
+
+//   set fullName(value) {
+//     [this.name, this.surname] = value.split(" ");
+//   }
+// };
+
+// // set fullName запустится с данным значением
+// user.fullName = "Alice Cooper";
+
+// console.log(user.fullName()); // Alice
+// console.log(user.surname); // Cooper
