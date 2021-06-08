@@ -164,7 +164,7 @@ sortSelect.addEventListener('change', event => {
 renderCards(CARS, carList);
 
 
-function renderCards(carsArray, carListElement, clear) {  //clear-undefined
+function renderCards(carsArray, carListElement, clear) {  //clear-undefined-true
   const limit = 10
   if (clear) {
     carListElement.innerHTML = ''
