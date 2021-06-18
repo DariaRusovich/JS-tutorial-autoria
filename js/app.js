@@ -33,6 +33,12 @@ const odoFormatter = new Intl.NumberFormat(undefined, {
 // CARS.length = 50
 console.log(CARS);
 
+if (!localStorage.getItem('wishlist')) {
+  localStorage.setItem('wishlist', JSON.stringify([]))
+}
+const wishlist = JSON.parse(localStorage.getItem('wishlist'))
+
+
 
 filterForm.addEventListener('submit', function (e) {
   e.preventDefault()
@@ -194,7 +200,28 @@ function createCardsHTML(carsArray, limit, existsElems) {
   return cardsHTML;
 }
 
-
+carList.addEventListener('click', e => {
+  const btn = e.target.closest('.wish-btn')
+  if (btn) {
+    console.log('Save click!');
+    const card = btn.closest('.card')
+    const carId = card.dataset.id
+    console.log(carId);
+    const savedCarIdIdx = wishlist.findIndex(savedCarId => savedCarId === carId)
+    if (savedCarIdIdx === -1) {
+      wishlist.push(carId)
+      btn.textContent = 'Saved!'
+      btn.classList.remove('btn-secondary')
+      btn.classList.add('btn-success')
+    } else{
+      wishlist.splice(savedCarIdIdx, 1)
+      btn.textContent = 'Save'
+      btn.classList.remove('btn-success')
+      btn.classList.add('btn-secondary')
+    }
+    localStorage.setItem('wishlist', JSON.stringify(wishlist))
+  }
+})
 
 function createCard(carData) {
   let stars = ''
@@ -210,9 +237,10 @@ function createCard(carData) {
   }
   const dateObj = new Date(carData.timestamp)
   const dateTimeSting = `${dateObj.toLocaleTimeString()} ${dateObj.toLocaleDateString()}`
-  return ` <div class="card mb-3 ">
+  return ` <div class="card mb-3 " data-id="${carData.id}">
   <div class="row g-0 card-half">
     <div class="col-md-4 card-img-wrap">
+      <button class="btn ${wishlist.includes(carData.id) ? 'btn-success' : 'btn-secondary'} wish-btn">${wishlist.includes(carData.id) ? 'Saved!' : 'Save'}</button>
       <img loading="lazy" width="1" height="1" class="card-img car-img" src="${carData.img}" alt="${carData.make} ${carData.model}">
     </div>
     <div class="col-md-8 card-body-wrap">
@@ -389,3 +417,71 @@ function findSiblings(node) {
 
 // console.log(user.fullName()); // Alice
 // console.log(user.surname); // Cooper
+
+
+
+
+// const o1 = {}
+
+// const o2 = {...o1}
+
+
+// const data = [15000, 356, 650]
+
+// const [salary] = data
+// const salary = data[0]
+
+
+const user = {
+  name: 'Ivan',
+  age: 26,
+  salary: 1000
+}
+
+const {salary: zp, name} = user
+
+console.log(zp, name);
+
+
+// const tax = data[2]
+
+
+// function func({op1, op2, op3}) {
+  
+// }
+
+
+const obj = {
+  "id": "89aed5b8c686ebd713a62873e4cd756abab7a106",
+  "make": "BMW",
+  "model": "M3",
+  "year": 2010,
+  "img": "http://dummyimage.com/153x232.jpg/cc0000/ffffff",
+  "color": "Goldenrod",
+  "vin": "1G6DW677550624991",
+  "country": "United States",
+  "rating": 1,
+  "price": 2269,
+  "views": 5,
+  "seller": "Ellery Girardin",
+  "vin_check": true,
+  "top": false,
+  "timestamp": 1601652988000,
+  "phone": "+1 (229) 999-8553",
+  "fuel": "Benzin",
+  "engine_volume": 1.4,
+  "transmission": "CVT",
+  "odo": 394036,
+  "consume": { "road": 4.8, "city": 12.3, "mixed": 8.4 }
+}
+console.log(Object.keys(obj));
+console.log(Object.values(obj));
+console.log(Object.entries(obj));
+
+
+
+// localStorage.setItem('kkk', 'vvv')
+
+// console.log(localStorage.getItem('kkk'));
+
+// localStorage.removeItem('kkk')
